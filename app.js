@@ -150,11 +150,22 @@ const TaraApp = {
             this.expenses = expenses ? JSON.parse(expenses) : [];
             this.settings = settings ? JSON.parse(settings) : { googleSheetUrl: "" };
             
-            if (products === null) {
-                // First time opening the app, auto load demo
+            // Check for sheet parameter in URL to auto-configure on other devices
+            const urlParams = new URLSearchParams(window.location.search);
+            const sheetParam = urlParams.get('sheet');
+            if (sheetParam) {
+                this.settings.googleSheetUrl = decodeURIComponent(sheetParam);
+                this.saveState();
+                
+                // Remove parameter from URL bar silently so it looks clean
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            
+            if (products === null && !sheetParam) {
+                // First time opening the app, auto load demo (unless a sheet is provided)
                 this.loadDemoData();
             } else {
-                this.products = JSON.parse(products);
+                this.products = products ? JSON.parse(products) : [];
             }
         } catch (e) {
             console.error("Error loading state", e);
@@ -637,6 +648,33 @@ const UI = {
                 SyncManager.setUIStatus("offline", "Local Storage Only");
                 TaraApp.showToast("บันทึกการตั้งค่าแล้ว", "success");
             }
+        });
+        
+        // Copy Share Link for other devices
+        document.getElementById("btn-copy-share-url").addEventListener("click", () => {
+            const url = TaraApp.settings.googleSheetUrl;
+            if (!url) {
+                TaraApp.showToast("กรุณาบันทึก URL Google Sheets ก่อนแชร์ลิงก์", "warning");
+                return;
+            }
+            
+            // Build the shareable URL
+            const shareUrl = `${window.location.origin}${window.location.pathname}?sheet=${encodeURIComponent(url)}`;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                TaraApp.showToast("คัดลอกลิงก์สำหรับแชร์สำเร็จ! ส่งลิงก์นี้ให้เครื่องอื่นใช้งานข้อมูลชุดนี้ได้ทันที", "success");
+            }).catch(err => {
+                console.error("Could not copy link", err);
+                // Fallback textarea method if navigator fails
+                const tempInput = document.createElement("input");
+                tempInput.value = shareUrl;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                TaraApp.showToast("คัดลอกลิงก์แชร์เครื่องอื่นแล้ว (Fallback)", "success");
+            });
         });
         
         // Sync Buttons
@@ -1682,4 +1720,9 @@ const UI = {
 document.addEventListener("DOMContentLoaded", () => {
     TaraApp.loadState();
     UI.init();
+    
+    // Auto-pull database from Google Sheet on startup if configured
+    if (TaraApp.settings.googleSheetUrl) {
+        SyncManager.pullData();
+    }
 });
