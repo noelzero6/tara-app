@@ -1515,6 +1515,16 @@ textarea:focus {
     margin-bottom: 12px;
 }
 
+.receipt-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    border: 1px solid #e5e7eb;
+    display: inline-block;
+}
+
 .receipt-header h2 {
     font-size: 1.15rem;
     font-weight: 700;
