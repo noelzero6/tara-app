@@ -696,6 +696,12 @@ textarea:focus {
     align-items: center;
 }
 
+#salesChart {
+    width: 100% !important;
+    height: 260px !important;
+    display: block;
+}
+
 /* Low stock warnings list */
 .alert-list-body {
     max-height: 280px;
