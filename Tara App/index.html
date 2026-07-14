@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tara App - ระบบจัดการร้านน้ำดื่มและเครื่องดื่ม</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <img src="logo/Logo-TARA.jpg" alt="Tara Logo" class="brand-logo-img">
+                <div class="brand-details">
+                    <h1>Tara App</h1>
+                    <span>ระบบบริหารร้านน้ำดื่ม</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active" data-tab="dashboard" id="nav-dashboard">
+                    <span class="menu-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    </span>
+                    <span class="menu-text">แดชบอร์ด</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="pos" id="nav-pos">
+                    <span class="menu-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    </span>
+                    <span class="menu-text">ขายหน้าร้าน (POS)</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="stock" id="nav-stock">
+                    <span class="menu-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </span>
+                    <span class="menu-text">สต็อก & สินค้า</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="accounting" id="nav-accounting">
+                    <span class="menu-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </span>
+                    <span class="menu-text">บัญชี & รายจ่าย</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="settings" id="nav-settings">
+                    <span class="menu-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </span>
+                    <span class="menu-text">ตั้งค่า & Google Sheet</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sync-status offline" id="connection-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-label" id="connection-status-text">Local Storage Only</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header/Topbar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-toggle" id="mobile-nav-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    </button>
+                    <h2 class="page-title" id="current-page-title">แดชบอร์ดสรุปผล</h2>
+                </div>
+                <div class="topbar-right">
+                    <div class="current-time" id="clock-display">14:00:00</div>
+                    <button class="btn btn-secondary sync-now-btn" id="header-sync-btn" title="ซิงก์ข้อมูลกับ Google Sheet ตอนนี้">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                        <span>ซิงก์ข้อมูล</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Container for pages (Tabs) -->
+            <div class="content-body">
+                
+                <!-- 1. DASHBOARD PAGE -->
+                <section class="tab-panel active" id="tab-dashboard">
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon income">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <h3>ยอดขายวันนี้</h3>
+                                <p class="stat-value" id="stat-sales-today">฿0.00</p>
+                                <span class="stat-trend trend-up" id="stat-sales-diff">฿0.00 จากเมื่อวาน</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon profit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <h3>กำไรสุทธิวันนี้</h3>
+                                <p class="stat-value" id="stat-profit-today">฿0.00</p>
+                                <span class="stat-trend trend-up" id="stat-profit-diff">คำนวณหักรายจ่ายแล้ว</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon orders">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <h3>จำนวนคำสั่งซื้อ</h3>
+                                <p class="stat-value" id="stat-orders-today">0 บิล</p>
+                                <span class="stat-trend" id="stat-orders-diff">เสร็จสิ้นแล้ววันนี้</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card alert-card" id="stat-low-stock-card">
+                            <div class="stat-icon warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            </div>
+                            <div class="stat-info">
+                                <h3>สต็อกเหลือน้อย</h3>
+                                <p class="stat-value" id="stat-low-stock-count">0 รายการ</p>
+                                <span class="stat-trend trend-down" id="stat-low-stock-desc">ควรเติมสต็อกสินค้าด่วน</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Graphs and Alerts Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Sales Chart Container -->
+                        <div class="chart-container glass-card">
+                            <div class="card-header">
+                                <h3>วิเคราะห์เทรนด์ยอดขาย (7 วันล่าสุด)</h3>
+                                <span class="card-subtitle">รายได้ประจำวัน</span>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="salesChart" height="260"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Low Stock & Alert list -->
+                        <div class="alert-list-container glass-card">
+                            <div class="card-header">
+                                <h3>แจ้งเตือนสินค้าใกล้หมดสต็อก</h3>
+                                <span class="card-subtitle">รายการที่ต่ำกว่าสต็อกขั้นต่ำ</span>
+                            </div>
+                            <div class="alert-list-body" id="low-stock-alert-list">
+                                <!-- Dynamic Items -->
+                                <div class="empty-state">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <p>สต็อกสินค้าทุกรายการยังคงปกติ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Sales Table -->
+                    <div class="recent-sales glass-card">
+                        <div class="card-header">
+                            <h3>ประวัติการขายล่าสุดวันนี้</h3>
+                            <a href="#" class="btn btn-text" id="dashboard-to-ledger">ดูสมุดบัญชีทั้งหมด &rarr;</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table" id="recent-sales-table">
+                                <thead>
+                                    <tr>
+                                        <th>เลขที่ใบเสร็จ</th>
+                                        <th>เวลา</th>
+                                        <th>รายการสินค้า</th>
+                                        <th>ยอดเงินรวม</th>
+                                        <th>รับเงิน</th>
+                                        <th>เงินทอน</th>
+                                        <th>การจัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-sales-tbody">
+                                    <!-- Dynamic rows -->
+                                    <tr>
+                                        <td colspan="7" class="text-center">ไม่มีข้อมูลการขายในวันนี้</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. POS PAGE -->
+                <section class="tab-panel" id="tab-pos">
+                    <div class="pos-layout">
+                        <!-- Menu Items Container (Left) -->
+                        <div class="pos-menu-panel">
+                            <!-- Category Filter and Search -->
+                            <div class="menu-control-bar">
+                                <div class="search-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                    <input type="text" placeholder="ค้นหาน้ำดื่ม/เครื่องดื่ม..." id="pos-search-input">
+                                </div>
+                                <div class="category-filters" id="pos-category-filters">
+                                    <button class="filter-btn active" data-category="all">ทั้งหมด</button>
+                                    <button class="filter-btn" data-category="water">น้ำดื่มแพ็ก</button>
+                                    <button class="filter-btn" data-category="soda">น้ำอัดลม</button>
+                                    <button class="filter-btn" data-category="juice">น้ำผลไม้</button>
+                                    <button class="filter-btn" data-category="energy">เครื่องดื่มชูกำลัง</button>
+                                    <button class="filter-btn" data-category="other">อื่น ๆ</button>
+                                </div>
+                            </div>
+
+                            <!-- Products Grid -->
+                            <div class="pos-products-grid" id="pos-products-grid">
+                                <!-- Dynamic Product Cards -->
+                            </div>
+                        </div>
+
+                        <!-- Shopping Cart (Right) -->
+                        <aside class="pos-cart-panel glass-card">
+                            <div class="cart-header">
+                                <h3>ตะกร้าสินค้า</h3>
+                                <button class="btn btn-icon-text btn-danger-text" id="clear-cart-btn" title="ล้างตะกร้า">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                                    <span>ล้างตะกร้า</span>
+                                </button>
+                            </div>
+
+                            <!-- Cart Items List -->
+                            <div class="cart-items-list" id="cart-items-list">
+                                <!-- Empty Cart State -->
+                                <div class="empty-cart-state">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                    <p>ตะกร้าว่างเปล่า<br>กรุณาคลิกเลือกเครื่องดื่มเพื่อขาย</p>
+                                </div>
+                            </div>
+
+                            <!-- Cart Pricing Summary -->
+                            <div class="cart-summary">
+                                <div class="summary-row">
+                                    <span>ยอดรวมสินค้า</span>
+                                    <span id="cart-subtotal">฿0.00</span>
+                                </div>
+                                <div class="summary-row discount-row">
+                                    <span>ส่วนลดพิเศษ (฿)</span>
+                                    <input type="number" value="0" min="0" id="cart-discount-input" class="summary-input">
+                                </div>
+                                <hr class="summary-divider">
+                                <div class="summary-row total-row">
+                                    <span>ยอดรวมสุทธิ</span>
+                                    <span id="cart-total">฿0.00</span>
+                                </div>
+                            </div>
+
+                            <!-- Cash Payment & Change Calculator -->
+                            <div class="payment-section">
+                                <div class="input-group">
+                                    <label for="payment-cash-received">ยอดรับเงินสด (บาท)</label>
+                                    <div class="cash-input-wrapper">
+                                        <span class="currency-prefix">฿</span>
+                                        <input type="number" id="payment-cash-received" placeholder="0" min="0">
+                                    </div>
+                                </div>
+
+                                <!-- Quick Cash Buttons -->
+                                <div class="quick-cash-grid">
+                                    <button class="quick-cash-btn" data-value="20">20</button>
+                                    <button class="quick-cash-btn" data-value="50">50</button>
+                                    <button class="quick-cash-btn" data-value="100">100</button>
+                                    <button class="quick-cash-btn" data-value="500">500</button>
+                                    <button class="quick-cash-btn" data-value="1000">1,000</button>
+                                    <button class="quick-cash-btn" id="cash-btn-exact">พอดี</button>
+                                </div>
+
+                                <div class="change-display">
+                                    <span>เงินทอน</span>
+                                    <span class="change-value" id="payment-change-value">฿0.00</span>
+                                </div>
+
+                                <button class="btn btn-primary btn-block btn-lg" id="checkout-submit-btn" disabled>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                    <span>ยืนยันการขาย & ออกใบเสร็จ</span>
+                                </button>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+                <!-- 3. INVENTORY & STOCK PAGE -->
+                <section class="tab-panel" id="tab-stock">
+                    <!-- Actions Row -->
+                    <div class="table-actions-bar">
+                        <div class="search-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" placeholder="ค้นหาสินค้าเพื่อจัดการสต็อก..." id="stock-search-input">
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" id="stock-filter-low" data-active="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                                <span>กรองสต็อกต่ำกว่าเกณฑ์</span>
+                            </button>
+                            <button class="btn btn-primary" id="open-add-product-modal-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                <span>เพิ่มรายการสินค้าใหม่</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stock Master Table -->
+                    <div class="stock-table-container glass-card">
+                        <div class="table-responsive">
+                            <table class="table align-middle" id="stock-master-table">
+                                <thead>
+                                    <tr>
+                                        <th>ภาพ</th>
+                                        <th>ชื่อสินค้า</th>
+                                        <th>หมวดหมู่</th>
+                                        <th>ราคาขาย</th>
+                                        <th>สต็อกปัจจุบัน</th>
+                                        <th>เกณฑ์แจ้งเตือนขั้นต่ำ</th>
+                                        <th>สถานะสต็อก</th>
+                                        <th>การจัดการสต็อกด่วน</th>
+                                        <th>การดำเนินการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stock-master-tbody">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. ACCOUNTING PAGE -->
+                <section class="tab-panel" id="tab-accounting">
+                    <div class="accounting-summary-grid">
+                        <div class="acc-summary-card income">
+                            <span class="acc-card-label">รายรับสะสม (ยอดขาย)</span>
+                            <h2 id="acc-total-income">฿0.00</h2>
+                            <p class="acc-card-desc" id="acc-income-count">0 บิลขาย</p>
+                        </div>
+                        <div class="acc-summary-card expense">
+                            <span class="acc-card-label">รายจ่ายรวม</span>
+                            <h2 id="acc-total-expense">฿0.00</h2>
+                            <p class="acc-card-desc" id="acc-expense-count">0 รายการรายจ่าย</p>
+                        </div>
+                        <div class="acc-summary-card profit-net">
+                            <span class="acc-card-label">กำไรสุทธิทั้งหมด</span>
+                            <h2 id="acc-total-net-profit">฿0.00</h2>
+                            <p class="acc-card-desc" id="acc-net-profit-percentage">คิดเป็น 0% ของรายรับ</p>
+                        </div>
+                    </div>
+
+                    <div class="accounting-grid">
+                        <!-- Add Expense Form -->
+                        <div class="expense-form-container glass-card">
+                            <div class="card-header">
+                                <h3>บันทึกรายจ่ายร้านค้า</h3>
+                                <span class="card-subtitle">ป้อนค่าใช้จ่ายเพื่อคำนวณกำไรสุทธิ</span>
+                            </div>
+                            <form id="accounting-expense-form">
+                                <div class="input-group">
+                                    <label for="expense-title">ชื่อรายการรายจ่าย</label>
+                                    <input type="text" id="expense-title" placeholder="เช่น ซื้อน้ำแข็ง, ค่าไฟร้าน, ค่าส่งของ" required>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="input-group">
+                                        <label for="expense-category">หมวดหมู่</label>
+                                        <select id="expense-category" required>
+                                            <option value="raw_materials">วัตถุดิบและน้ำดื่ม</option>
+                                            <option value="utilities">ค่าน้ำ/ค่าไฟ/อินเทอร์เน็ต</option>
+                                            <option value="rent">ค่าเช่าร้าน/สถานที่</option>
+                                            <option value="salary">ค่าแรงพนักงาน</option>
+                                            <option value="transport">ค่าเดินทาง/ขนส่ง</option>
+                                            <option value="other">อื่น ๆ</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="expense-amount">จำนวนเงิน (บาท)</label>
+                                        <input type="number" id="expense-amount" placeholder="0.00" min="0.01" step="0.01" required>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="expense-date">วันที่บันทึก</label>
+                                    <input type="date" id="expense-date" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    <span>บันทึกรายจ่าย</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Accounting Ledger / Transactions -->
+                        <div class="ledger-container glass-card">
+                            <div class="card-header">
+                                <h3>สมุดบันทึกรายการเดินบัญชี (Ledger)</h3>
+                                <div class="ledger-header-actions">
+                                    <select id="ledger-filter-type" class="select-sm">
+                                        <option value="all">ทั้งหมด</option>
+                                        <option value="income">รายรับ (การขาย)</option>
+                                        <option value="expense">รายจ่าย</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ledger-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="ledger-table">
+                                        <thead>
+                                            <tr>
+                                                <th>วันเวลา</th>
+                                                <th>ประเภท</th>
+                                                <th>รายการบันทึก</th>
+                                                <th>หมวดหมู่</th>
+                                                <th>ยอดเงิน</th>
+                                                <th>การจัดการ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ledger-tbody">
+                                            <!-- Dynamic Rows -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. SETTINGS & GOOGLE SHEETS SYNC PAGE -->
+                <section class="tab-panel" id="tab-settings">
+                    <div class="settings-grid">
+                        
+                        <!-- Configuration Card -->
+                        <div class="settings-card glass-card">
+                            <div class="card-header">
+                                <h3>การเชื่อมต่อ Google Sheets</h3>
+                                <span class="card-subtitle">ซิงก์ข้อมูลไปเก็บบน Google Sheets ของคุณแบบเรียลไทม์</span>
+                            </div>
+                            <div class="settings-body">
+                                <div class="connection-setup-form">
+                                    <div class="input-group">
+                                        <label for="google-sheet-url">Google Apps Script Web App URL</label>
+                                        <input type="url" id="google-sheet-url" placeholder="https://script.google.com/macros/s/.../exec">
+                                        <p class="input-tip">สร้าง URL นี้ได้ฟรีจาก Google Sheet ของคุณ ตามคู่มือแนะนำด้านล่าง</p>
+                                    </div>
+                                    <div class="settings-actions">
+                                        <button class="btn btn-secondary" id="btn-test-sheet-conn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
+                                            <span>ทดสอบการเชื่อมต่อ</span>
+                                        </button>
+                                        <button class="btn btn-primary" id="btn-save-sheet-url">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                                            <span>บันทึกและซิงก์ข้อมูล</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <hr class="settings-divider">
+
+                                <div class="sync-data-management">
+                                    <h4>จัดการข้อมูลการซิงก์</h4>
+                                    <p class="desc-text">คุณสามารถนำเข้า/ส่งออกข้อมูลเครื่องดื่มและยอดขาย เพื่อสำรองข้อมูลได้</p>
+                                    <div class="button-row">
+                                        <button class="btn btn-secondary-outline" id="btn-sync-pull">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                            <span>ดึงข้อมูลจาก Google Sheet (Pull)</span>
+                                        </button>
+                                        <button class="btn btn-secondary-outline" id="btn-sync-push">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                            <span>ส่งข้อมูลขึ้น Google Sheet (Push)</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <hr class="settings-divider">
+
+                                <div class="demo-reset-section">
+                                    <h4>ตัวอย่างการใช้งานและการล้างข้อมูล</h4>
+                                    <p class="desc-text">โหลดข้อมูลตัวอย่างเริ่มต้นเพื่อลองขาย หรือล้างข้อมูลทั้งหมดในเครื่องเพื่อเริ่มต้นใหม่</p>
+                                    <div class="button-row">
+                                        <button class="btn btn-secondary" id="btn-load-demo-data">โหลดสินค้าจำลองตัวอย่าง</button>
+                                        <button class="btn btn-danger-outline" id="btn-reset-app-data">ล้างข้อมูลทั้งหมดในเครื่อง</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Guide Card -->
+                        <div class="settings-card glass-card">
+                            <div class="card-header">
+                                <h3>สคริปต์ Google Apps Script และขั้นตอนการติดตั้ง</h3>
+                                <span class="card-subtitle">สร้างสะพานเชื่อมข้อมูลจากเว็บเข้าสู่สเปรดชีตของคุณ</span>
+                            </div>
+                            <div class="guide-body">
+                                <ol class="guide-steps">
+                                    <li>สร้าง **Google Sheet** ใหม่ขึ้นมา 1 ใบ</li>
+                                    <li>กดไปที่ **ส่วนขยาย (Extensions) &rarr; Apps Script**</li>
+                                    <li>ลบโค้ดเริ่มต้นออกทั้งหมด แล้วคัดลอกโค้ดสคริปต์ด้านล่างนี้ไปวางแทนที่</li>
+                                    <li>คลิกที่ปุ่ม **การเปิดใช้งาน (Deploy) &rarr; การเปิดใช้งานใหม่... (New Deployment)**</li>
+                                    <li>เลือกประเภทเป็น **เว็บแอป (Web App)**</li>
+                                    <li>ตั้งค่า **ผู้มีสิทธิ์เข้าถึง (Who has access)** เป็น **ทุกคน (Anyone)**</li>
+                                    <li>คลิก **เปิดใช้งาน (Deploy)** ยอมรับสิทธิ์ และคัดลอก **URL เว็บแอป** มาใส่ในช่องตั้งค่าด้านซ้าย</li>
+                                </ol>
+                                
+                                <div class="script-box-container">
+                                    <div class="script-header">
+                                        <span>Google Apps Script Code</span>
+                                        <button class="btn btn-sm btn-secondary" id="btn-copy-script">คัดลอกโค้ด</button>
+                                    </div>
+                                    <textarea readonly id="apps-script-textarea" class="code-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: ADD/EDIT PRODUCT -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 id="product-modal-title">เพิ่มรายการสินค้าใหม่</h3>
+                <button class="btn-close" id="product-modal-close">&times;</button>
+            </div>
+            <form id="product-modal-form">
+                <input type="hidden" id="product-id-input">
+                
+                <div class="input-group">
+                    <label for="product-name-input">ชื่อน้ำดื่ม/เครื่องดื่ม</label>
+                    <input type="text" id="product-name-input" placeholder="เช่น น้ำดื่มคริสตัล 1.5 ลิตร (แพ็ก 6)" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="product-category-input">หมวดหมู่</label>
+                        <select id="product-category-input" required>
+                            <option value="water">น้ำดื่มแพ็ก</option>
+                            <option value="soda">น้ำอัดลม</option>
+                            <option value="juice">น้ำผลไม้</option>
+                            <option value="energy">เครื่องดื่มชูกำลัง</option>
+                            <option value="other">อื่น ๆ</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="product-image-select">ไอคอนอิโมจิเริ่มต้น</label>
+                        <select id="product-image-select">
+                            <option value="water-pack">💧 แพ็กน้ำดื่มมาตรฐาน</option>
+                            <option value="water-bottle">🍼 ขวดน้ำดื่มเดี่ยว</option>
+                            <option value="soda-can">🥤 กระป๋องน้ำอัดลม</option>
+                            <option value="soda-bottle">🍾 ขวดน้ำอัดลม/ขวดแก้ว</option>
+                            <option value="juice-box">🧃 กล่องน้ำผลไม้/นม</option>
+                            <option value="energy-bottle">⚡ ขวดแก้วเครื่องดื่มชูกำลัง</option>
+                            <option value="other-beverage">📦 ลังสินค้า/อื่น ๆ</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="product-cost-input">ราคาต้นทุนต่อหน่วย (บาท)</label>
+                        <input type="number" id="product-cost-input" placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="product-price-input">ราคาขายต่อหน่วย (บาท)</label>
+                        <input type="number" id="product-price-input" placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="product-stock-input">สต็อกปัจจุบัน</label>
+                        <input type="number" id="product-stock-input" placeholder="0" min="0" value="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="product-min-stock-input">เกณฑ์แจ้งเตือนสต็อกต่ำ</label>
+                        <input type="number" id="product-min-stock-input" placeholder="10" min="0" value="10" required>
+                    </div>
+                </div>
+
+                <div class="form-row" style="align-items: center;">
+                    <div class="input-group">
+                        <label for="product-image-file">อัปโหลดรูปภาพสินค้า (PNG/JPG)</label>
+                        <input type="file" id="product-image-file" accept="image/*">
+                        <input type="hidden" id="product-image-base64">
+                    </div>
+                    <div class="input-group">
+                        <label>ภาพตัวอย่าง</label>
+                        <div class="image-upload-preview" id="image-upload-preview" style="height: 50px; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border-color); border-radius: var(--radius-sm); overflow: hidden; background: rgba(0,0,0,0.2);">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">ไม่มีรูปภาพ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="product-modal-cancel">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary" id="product-modal-submit">บันทึกสินค้า</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: RECEIPT VISUALIZER -->
+    <div class="modal" id="receipt-modal">
+        <div class="modal-content receipt-modal-content glass-card">
+            <div class="modal-header">
+                <h3>การขายเสร็จสมบูรณ์</h3>
+                <button class="btn-close" id="receipt-modal-close">&times;</button>
+            </div>
+            
+            <div class="receipt-paper" id="receipt-print-area">
+                <div class="receipt-header">
+                    <h2>TARA APP DRINK SHOP</h2>
+                    <p>ระบบหน้าร้านขายส่ง-ปลีก น้ำดื่ม & เครื่องดื่ม</p>
+                    <p class="receipt-meta">วันที่: <span id="rec-date">14/07/2026</span> | เวลา: <span id="rec-time">14:00</span></p>
+                    <p class="receipt-meta">เลขใบเสร็จ: <span id="rec-number">TR-123456</span></p>
+                </div>
+                
+                <hr class="receipt-divider">
+                
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>รายการ</th>
+                            <th class="text-center">จำนวน</th>
+                            <th class="text-right">ราคา</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receipt-items-tbody">
+                        <!-- Dynamic items -->
+                    </tbody>
+                </table>
+                
+                <hr class="receipt-divider">
+                
+                <div class="receipt-totals">
+                    <div class="total-row">
+                        <span>ยอดรวม</span>
+                        <span id="rec-subtotal">฿0.00</span>
+                    </div>
+                    <div class="total-row discount" id="rec-discount-row">
+                        <span>ส่วนลดพิเศษ</span>
+                        <span id="rec-discount">฿0.00</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>ยอดรวมสุทธิ</span>
+                        <span id="rec-total">฿0.00</span>
+                    </div>
+                    <hr class="receipt-divider-dash">
+                    <div class="total-row">
+                        <span>รับเงินสด</span>
+                        <span id="rec-cash-received">฿0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>เงินทอน</span>
+                        <span id="rec-change">฿0.00</span>
+                    </div>
+                </div>
+                
+                <div class="receipt-footer">
+                    <p>ขอบคุณที่ใช้บริการครับ/ค่ะ</p>
+                    <p>Powered by Tara App & Google Sheets</p>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-close-receipt">ปิดหน้าต่าง</button>
+                <button class="btn btn-primary" id="btn-print-receipt">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    <span>สั่งพิมพ์ใบเสร็จ (Print)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- JS Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
