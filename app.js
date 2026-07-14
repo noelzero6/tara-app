@@ -111,6 +111,11 @@ function saveDataToSheet(sheet, dataList, fields) {
   sheet.getRange(2, 1, rows.length, fields.length).setValues(rows);
 }`;
 
+// --- CONFIGURATION ---
+// หากคุณรันเว็บบน Vercel ของตัวเอง และต้องการให้เครื่องอื่นเชื่อมต่อ Google Sheets ใบเดียวกันโดยอัตโนมัติทันที
+// สามารถวาง URL Google Apps Script Web App (ลิงก์ /exec) ลงในช่องว่างเครื่องหมายคำพูดด้านล่างนี้ได้เลยครับ!
+const DEFAULT_GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyO2vRxGUgC71NOnI8yaVJ3jOxL6CHg3USSacoPjEmlwrB0HKqr74-zO5dMzv0ldVE/exec"; 
+
 // --- MOCK DATA ---
 const DEMO_PRODUCTS = [
     { id: "P-1001", name: "น้ำดื่มคริสตัล 1.5L (แพ็ก 6)", category: "water", price: 60.00, cost: 42.00, stock: 45, minStock: 10, imageCode: "water-pack", image: null },
@@ -148,7 +153,12 @@ const TaraApp = {
             
             this.sales = sales ? JSON.parse(sales) : [];
             this.expenses = expenses ? JSON.parse(expenses) : [];
-            this.settings = settings ? JSON.parse(settings) : { googleSheetUrl: "" };
+            
+            this.settings = settings ? JSON.parse(settings) : { googleSheetUrl: DEFAULT_GOOGLE_SHEET_URL };
+            if (!this.settings.googleSheetUrl && DEFAULT_GOOGLE_SHEET_URL) {
+                this.settings.googleSheetUrl = DEFAULT_GOOGLE_SHEET_URL;
+                this.saveState();
+            }
             
             // Check for sheet parameter in URL to auto-configure on other devices
             const urlParams = new URLSearchParams(window.location.search);
@@ -161,8 +171,8 @@ const TaraApp = {
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
             
-            if (products === null && !sheetParam) {
-                // First time opening the app, auto load demo (unless a sheet is provided)
+            if (products === null && !sheetParam && !this.settings.googleSheetUrl) {
+                // First time opening the app, auto load demo (unless a sheet is provided or configured)
                 this.loadDemoData();
             } else {
                 this.products = products ? JSON.parse(products) : [];
