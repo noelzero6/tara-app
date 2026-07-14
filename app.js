@@ -146,14 +146,15 @@ const TaraApp = {
             const expenses = localStorage.getItem("tara_expenses");
             const settings = localStorage.getItem("tara_settings");
             
-            this.products = products ? JSON.parse(products) : [];
             this.sales = sales ? JSON.parse(sales) : [];
             this.expenses = expenses ? JSON.parse(expenses) : [];
             this.settings = settings ? JSON.parse(settings) : { googleSheetUrl: "" };
             
-            // If empty database, auto load demo
-            if (this.products.length === 0) {
+            if (products === null) {
+                // First time opening the app, auto load demo
                 this.loadDemoData();
+            } else {
+                this.products = JSON.parse(products);
             }
         } catch (e) {
             console.error("Error loading state", e);
