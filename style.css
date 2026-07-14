@@ -1495,13 +1495,19 @@ textarea:focus {
 
 .receipt-paper {
     background-color: #ffffff;
-    color: #000000;
+    color: #000000 !important;
     border-radius: 4px;
-    padding: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.85rem;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    font-family: var(--font-thai), sans-serif;
+    font-size: 0.9rem;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
     border: 1px dashed #d1d5db;
+    line-height: 1.5;
+}
+
+.receipt-paper * {
+    color: #000000 !important;
+    font-family: var(--font-thai), sans-serif;
 }
 
 .receipt-header {
@@ -1510,57 +1516,56 @@ textarea:focus {
 }
 
 .receipt-header h2 {
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1.15rem;
+    font-weight: 700;
     margin-bottom: 4px;
 }
 
 .receipt-header p {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     margin: 2px 0;
-    color: #4b5563;
 }
 
 .receipt-meta {
-    font-size: 0.7rem !important;
+    font-size: 0.75rem !important;
 }
 
 .receipt-divider {
     border: none;
     border-top: 1px dashed #000000;
-    margin: 10px 0;
+    margin: 12px 0;
 }
 
 .receipt-divider-dash {
     border: none;
     border-top: 1px dotted #000000;
-    margin: 6px 0;
+    margin: 8px 0;
 }
 
 .receipt-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
 }
 
 .receipt-table th {
-    font-weight: bold;
+    font-weight: 700;
     border-bottom: 1px dashed #000000;
-    padding: 4px 0;
-    color: #000000;
+    padding: 6px 0;
 }
 
 .receipt-table td {
-    padding: 6px 0;
+    padding: 8px 0;
     border: none;
-    color: #000000;
+    font-weight: 500;
 }
 
 .receipt-totals {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    font-size: 0.8rem;
+    gap: 6px;
+    font-size: 0.85rem;
 }
 
 .receipt-totals .total-row {
@@ -1569,16 +1574,17 @@ textarea:focus {
 }
 
 .receipt-totals .grand-total {
-    font-weight: bold;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.05rem;
     margin-top: 4px;
+    border-top: 1px dashed #000000;
+    padding-top: 6px;
 }
 
 .receipt-footer {
     text-align: center;
-    margin-top: 16px;
-    font-size: 0.75rem;
-    color: #4b5563;
+    margin-top: 20px;
+    font-size: 0.8rem;
 }
 
 .receipt-footer p {
