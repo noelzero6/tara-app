@@ -1516,12 +1516,10 @@ textarea:focus {
 }
 
 .receipt-logo {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 8px;
-    border: 1px solid #e5e7eb;
+    max-width: 140px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
     display: inline-block;
 }
 
